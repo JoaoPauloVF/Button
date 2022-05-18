@@ -1,14 +1,16 @@
-# Title
+# Button
 
-Short desc
+A Lua function made in the [TIC-80 fantasy console](https://tic80.com/) that creates buttons that interact with the mouse.
+
+These buttons have an (x, y) position, booleans that check if they are pressing or were released, and a sprite pair for the above cases. Besides this, they have updating and rendering functions.
 
 ![gif of the cartridge demo.](gifs/demo.gif)
 
+[Click here][cartridge web page] to try the cartridge on the TIC-80 site.
+
 ## Controls
 
-How to control
-
-[Click here][cartridge web page] to try the cartridge on the TIC-80 site.
+Position the mouse cursor on some of the buttons and click to press it.
 
 ## How to get the code
 
@@ -24,11 +26,9 @@ How to control
 
   ![demo of how to access the cartridges on the TIC-80](/gifs/seeOnTic.gif)
 
-[cartridge web page]:https://tic80.com/play?cart=2628
+[cartridge web page]:https://tic80.com/play?cart=2795
 
 ## See also
-
-[Official TIC-80 site](https://tic80.com/)
 
 [TIC-80 GitHub repository](https://github.com/nesbox/TIC-80/)
 
