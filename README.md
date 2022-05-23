@@ -26,7 +26,7 @@ Position the mouse cursor on some of the buttons and click to press it.
 
   ![demo of how to access the cartridges on the TIC-80](/gifs/seeOnTic.gif)
 
-**5.** Consider visiting the [wiki](https://github.com/JoaoPauloVF/button-function/wiki) for general instructions and Button object explanation too.
+**5.** Consider visiting the [wiki](https://github.com/JoaoPauloVF/Button/wiki) for general instructions and Button object explanation too.
 
 [cartridge web page]:https://tic80.com/play?cart=2795
 

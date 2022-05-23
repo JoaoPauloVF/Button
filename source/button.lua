@@ -1,7 +1,7 @@
 -- title:   Button
 -- author:  JoaoPauloVF
 -- desc:    A function that creates buttons that interact with the mouse
--- github:  https://github.com/JoaoPauloVF/button-function
+-- github:  https://github.com/JoaoPauloVF/Button
 -- license: MIT License
 -- version: 0.2
 -- script:  lua
@@ -13,7 +13,7 @@
 	instructions and Button object 
 	explanation:
 	
-	https://github.com/JoaoPauloVF/button-function/wiki
+	https://github.com/JoaoPauloVF/Button/wiki
 	
 	* Check the summary below to access 
 	the function code or usage	examples.
