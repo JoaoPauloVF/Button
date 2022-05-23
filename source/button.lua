@@ -3,259 +3,46 @@
 -- desc:    A function that creates buttons that interact with the mouse
 -- github:  https://github.com/JoaoPauloVF/button-function
 -- license: MIT License
--- version: 0.1
+-- version: 0.2
 -- script:  lua
 -- input:   mouse
 -- palette: 101015e64040651818ff9d59814410eeee447d7d10b6b6d244445d40e6e630919110343410284444f244107110f6f6f8
 
 --[[
+	* Visit the wiki page for general 
+	instructions and Button object 
+	explanation:
+	
+	https://github.com/JoaoPauloVF/button-function/wiki
+	
+	* Check the summary below to access 
+	the function code or usage	examples.
+	
             ----Summary----
 
  (ctrl+f, search for the term or 
  chapter and press down):
-
- Description...................:-1-
- Button Object                 :-2-
-   Attributes And Functions....:2-1
-     Attributes                :2-2
-     Functions.................:2-3
- How To Use                    :-3-
  
- BOOT() function
+ BOOT() Function
    Constants
-   Button() Function...........:-4-
-   Swicth() Function           :-5-
-   print Functions
-     printAlign()
-     printTitle()
-   Demo Code...................:-6-
-     Pressing Example          :6-1
-     Releasing Example.........:6-2
-     Switching Example         :6-3
- TIC() Function
-]]--
-
---[[
-
-          -1---Description----
-
- Returns a Button object. Buttons have
- an (x, y) position, booleans that 
- check if they are pressing or were 
- released, and a sprite pair for the 
- above cases. Besides this, buttons 
- have updating and rendering functions.
- 
- See the "Button Object" section for 
- more details.
-
-            ----Button----
-            
- Button(settings) --> Button object
- 
-        ----Button Paraments----
-        
- settings: 
-    A table with the button attributes.
-    See them in the "Attributes" 
-    section.
-
-        -2---Button Object----
-
- The Button object is simply a table 
- with some attributes(variables) and 
- functions that permit the creation 
- and usage of a functional button that
- interacts with the mouse.
-
-
--2-1--Button Attributes and Functions----
-
-Attributes-2-2
-
- These are the possible indexes to the 
- "settings" table.
-
- x, y:
-   The position of the top-left edge 
-   of the button sprite.
- 
- sprites:
-   The sprites used by the button.
-    
-   They are passed to the function 
-   as a table with two values.
-    
-   Table structure:
-    
-     {value1, value2}
-      
-     value1: 
-       The sprite ID for the case 
-       that the button is not 
-       pressed.
-        
-     value2:
-       The sprite ID for the opposite 
-       case.
-        
-   For example, these are valid 
-   values:
-    
-     {0, 1}
-     {256, 298}
-     {305, 307}
-    
- colorKey, scale, flip, rotate, sprW, sprH:
-   The same paraments(from the fourth)
-   of the spr function.
-    
-   See the spr wiki page: https://github.com/nesbox/TIC-80/wiki/spr#parameters
-    
- margins:
-   A table with the limits of the 
-   sprite. Use it when the sprite 
-   doesn't fill the canvas of the 
-   sprite editor.
-    
-   Table structure:
-    
-     {
-       side=value, 
-       side=value, 
-       side=value, 
-       side=value
-     }
-      
-     side: 
-       A string that indicates the 
-       margin side. It can be "up", 
-       "down", "left" or "right".
-      
-     value:
-       An integer that indicates the 
-       number of pixels at the sprite 
-       editor canvas dislocated from 
-       the side. It's zero for 
-       default.
-     
-     Examples of valid values:
-    
-       {up=1, down=1, left=2, right=2}
-       {right=1}
-       {up=2, down=3}
-    
- pressed: 
-    It's true while the button is 
-    pressing.
- 
- released:
-    It's true only on the frame that
-    the button is released.
-
-Functions-2-3
-
- update:
-    Check if the button is pressing 
-    and update its sprite, "pressed", 
-    and "released" attributes based on 
-    this.
-    
- render:
-    Draw the button on the screen.
-    
- centralize:
-    Centralize the button based on 
-    its current position.
-    Use it only once time.
-    
-    centralize([xAxis=false], [yAxis=false])
-    
-    xAxis: 
-      Set it true to centralize on the 
-      x-axis.
-    yAxis: 
-      The same to the y-axis.
-
-           -3---How To Use----
-           
- First, have the Button() function
- (search for it in the Summary) in 
- your code.
-
- After this, use it to create a new 
- Button object setting the wished 
- attributes in a table(they are in 
- the "Attributes" section):
-
-   --Settings table:
-   --{
-   --   attr1 = value, 
-   --   attr2 = value, 
-   --   attr3 = value,
-   --   ...
-   --}
-
-    randomButton = Button({
-        x=120,
-        y=50,
-        sprites={291, 292},
-        scale=3
-    })
-
- For instance, the above code creates 
- a button at the (120, 50) position. 
- Moreover, it uses the scaled sprite 
- 291 when it isn't pressing and the 
- 292 one when it is.
-
- You can create how many Buttons 
- Objects you want:
-
-    button1 = Button({x=0, y=0, sprites={256, 257}, sprW=2})
-    button2 = Button({x=50, y=50, sprites={258, 259}, margins={up=1, down=1}, scale=4})
-    button3 = Button({x=120, y=68, sprites={260, 261}, margins={left=1}, scale=4, colorKey=2})
-    ...
-    
- Now, in the TIC(), use the update and
- the render function:
-    
-    randomButton = Button({...})
-    function TIC()
-       randomButton.update() 
-       ...
-       randomButton.render()
-    end
-
- To associate an action to the button,
- use if statements:
-
-    randomButton = Button({
-       --attributes
-    })
-    function TIC()
-       randomButton.update() 
-       
-       if randomButton.pressed then
-          --some code
-       end
-       if randomButton.released then
-          --some code
-       end
-       ...
-       randomButton.render()
-    end
-
- Done! You already can create and use
- buttons.
- Go to "Demo Code" section for examples.
- 
+   Button() Function...........:-1-
+   Swicth() Function           :-2-
+   print Functions.............:
+     printAlign()              :
+     printTitle()..............:
+   		printInstruction()        :
+   Demo Code...................:-3-
+     Pressing Example          :3-1
+     Releasing Example.........:3-2
+     Switching Example         :3-3
+ TIC() Function................:
 ]]--
 
 ----BOOT() Function----
 function BOOT()
 	----Constants----
 	BORDER_COLOR = 0x3FF8
+	CURSOR_ADDR = 0x3FFB
 	
 	WIDTH = 240
 	HEIGHT = 136
@@ -270,16 +57,16 @@ function BOOT()
 	
 	demoTitle = "Button()/Switch() Demo"
 	
-	--4--Button() Function----
-    --[[
-    This is the Button function. 
-    You can try it in your code or go
-    to the "Demo Code" to see usage 
-    examples. 
+	--1--Button() Function----
+	--[[
+		This is the Button function. 
+		You can try it in your code or go
+		to the "Demo Code" to see some 
+		examples. 
 		
-    There are some sprites samples in 
-    the sprite editor too.
-    ]]--
+		There are some sprites samples in 
+		the sprite editor too.
+	]]--
 	function Button(settings)
 		local self = {}
 		
@@ -292,31 +79,44 @@ function BOOT()
 		self.colorKey = type(settings.colorKey)=="number" and settings.colorKey or 0
 		self.flip = type(settings.flip)=="number" and settings.flip or 0
 		self.rotate = type(settings.rotate)=="number" and settings.rotate or 0
-		self.margins = type(settings.margins)=="table" and settings.margins or {up=0, down=0, left=0, right=0}
+		self.margins = type(settings.margins)=="table" and settings.margins or {top=0, bottom=0, left=0, right=0}
+		
+		self.changeCursor = true
+		if type(settings.changeCursor)=="boolean" then
+			self.changeCursor = settings.changeCursor
+		end
 		
 		--Check if the margins values are numbers
-		for _, side in pairs({"up", "down", "left", "right"}) do
+		for _, side in pairs({"top", "bottom", "left", "right"}) do
 			if not(self.margins[side]) then
 				self.margins[side] = 0
 			end
 		end
 		
+		local cursors = {128, 129}--{arrow, hand}
+		
 		local sprId = self.sprites[1]
 		
+		--button state variables
 		self.pressed = false
 		local wasPressed = false
 		self.released = false
 		
+		--cursor state variables
+		local cursorIsOnButton = false
+		local cursorWasOnButton = false
+		local cursorJustLeft = false
+		
+		self.width = self.scale*(SPR_SIZE*self.sprW-self.margins.right-self.margins.left)
+		self.height = self.scale*(SPR_SIZE*self.sprH-self.margins.bottom-self.margins.top)
+		
 		
 		self.centralize = function(xAxis, yAxis)
-			local width = self.scale*(SPR_SIZE*self.sprW-self.margins.right-self.margins.left)
-			local height = self.scale*(SPR_SIZE*self.sprH-self.margins.down-self.margins.up)
-			
 			if xAxis then
-				self.x = self.x - self.margins.left*self.scale - width/2
+				self.x = self.x - self.margins.left*self.scale - self.width/2
 			end
 			if yAxis then
-				self.y = self.y - self.margins.up*self.scale - height/2
+				self.y = self.y - self.margins.top*self.scale - self.height/2
 			end
 		end
 		
@@ -328,19 +128,20 @@ function BOOT()
 			
 			local x1 = self.x + self.margins.left*self.scale
 			local x2 = self.x + self.scale*(sprWidth - self.margins.right)
-			local y1 = self.y + self.margins.up*self.scale
-			local y2 = self.y + self.scale*(sprHeight - self.margins.down)
+			local y1 = self.y + self.margins.top*self.scale
+			local y2 = self.y + self.scale*(sprHeight - self.margins.bottom)
 			
-			local cursorIsOnButton = 
+			cursorIsOnButton = 
 				mouseX >= x1 and mouseX <= x2 and
 				mouseY >= y1 and mouseY <= y2
-	  
-			local isPressing = left and cursorIsOnButton 
 
-			local pressed = isPressing
+			local pressed = left and cursorIsOnButton 
 			local released = wasPressed and not(pressed) and cursorIsOnButton
-	  
+			
+			cursorJustLeft = cursorWasOnButton and not(cursorIsOnButton)
+			
 			wasPressed = pressed
+			cursorWasOnButton = cursorIsOnButton
 			
 			return pressed, released
 		end
@@ -349,9 +150,21 @@ function BOOT()
 			sprId = conditional and self.sprites[2] or self.sprites[1]
 		end
 		
+		self.updateCursor = function()
+			if self.changeCursor then
+				if cursorJustLeft then
+					poke(CURSOR_ADDR, cursors[1])
+				elseif cursorIsOnButton then
+					poke(CURSOR_ADDR, cursors[2])
+				end
+			end
+		end
+		
+		
 		self.update = function()
 			self.pressed, self.released = self.updateState()
 			self.updateSprId(self.pressed)
+			self.updateCursor()
 		end
 		
 		self.render = function()
@@ -365,20 +178,21 @@ function BOOT()
 			)
 		end
 		
+		
 		return self
 	end
-	--5--Switch() Function----
-    --[[
-    The Switch object is like a Button 
-    object. The difference is that the 
-    first has the boolean attribute "on"
-    that inverts its value when the 
-    Switch is clicked. The sprite is 
-    based on this value too.
+	--2--Switch() Function----
+	--[[
+		The Switch object is like a Button 
+		object. The difference is that the 
+		first has the boolean attribute "on"
+		that inverts its value when the 
+		Switch is clicked. The sprite is 
+		based on this value too.
   
-    Note that the function needs the 
-    Button() to work.	
-    ]]--
+		Note that the function needs the 
+		Button() to work.	
+	]]--
 	function Switch(settings)
 		local self = Button(settings)
 		
@@ -389,8 +203,8 @@ function BOOT()
 			
 			if released then self.on = not(self.on) end
 			self.updateSprId(self.on)
+			self.updateCursor()
 		end
-		
 		
 		return self
 	end
@@ -398,13 +212,13 @@ function BOOT()
 	----prints Functions----
 	
 	----printAlign()----
-    --[[
-    The normal print with Alignment 
-    options.
+	--[[
+		The normal print with Alignment 
+		options.
 		
-    I already have made a cartridge 
-    for it: https://tic80.com/play?cart=2594
-    ]]--
+		I already have made a cartridge 
+		for it: https://tic80.com/play?cart=2594
+	]]--
 	local function printAlign(text, x, y, alignX, alignY, color, fixed, scale, smallFont)
  	local x = x or 0
 		local y = y or 0
@@ -416,7 +230,7 @@ function BOOT()
 		local smallFont = smallFont or false
 	  
 		local font_h = 6 * scale
-		local font_w = print(text, 0, -font_h*scale, color, fixed, scale, smallFont)
+		local font_w = print(text, 0, -font_h*scale*1024, color, fixed, scale, smallFont)
 	  
 		x = alignX=="right" and x or alignX=="center" and x - font_w//2 or alignX=="left" and x - font_w + 1*scale or x 
 		y = alignY=="bottom" and y or alignY=="middle" and y - font_h//2 or alignY=="top" and y - font_h + 1*scale or y 
@@ -425,10 +239,10 @@ function BOOT()
 	end
 	----printTitle()----
 	--[[
-	It use the previous function to 
-	print the demo title.
+		It use the previous function to 
+		print the demo title.
 	]]--
-	function printTitle(title, subTitle)
+	function printTitle(title)
 		local x = WIDTH*0.5
 		local y = HEIGHT*0.03*4
 		printAlign(
@@ -441,28 +255,44 @@ function BOOT()
 				smallFont
 		)
 	end
-	
-	--6--Demo Code----
+	----printInstruction()----
 	--[[
-	Here, I create some Buttons and 
-	a Switch and use them.
+		It prints the examples texts.
+	]]--
+	function printInstruction(text, y, button, x)
+		local x = x or button.x + button.width/2 + button.margins.left*button.scale
+		local y = y or 0
+		printAlign(
+				text, 
+				x, y, 
+				"center", "middle", 
+				WHITE, 
+				false, 
+				1,
+				smallFont
+		)
+	end
+	--3--Demo Code----
+	--[[
+		Here, I create some Buttons and 
+		a Switch and use them.
 		
-	In case you have doubts about 
-	using the function, this part can 
-	help you.
+		In case you have doubts about 
+		using the function, this part can 
+		help you.
 	]]--
 	
-	--6-1-Pressing Example----
+	--3-1-Pressing Example----
 	--[[
-	This is the example more to the 
-	left. It tests the "pressed" 
-	attribute.
+		This is the example more to the 
+		left. It tests the "pressed" 
+		attribute.
 		
-	It consists of two buttons and 
-	a number.
-    It decreases if the "minusB" is 
-    pressed and increases when the 
-    "plusB" is pressed.
+		It consists of two buttons and 
+		a number.
+		It decreases if one of the buttons 
+		is pressed and increases if the 
+		other one is.
 	]]--
 	number = 0
 	
@@ -502,27 +332,31 @@ function BOOT()
 			number=number-1
 		end
 	end
+	
 	function renderPressingExample()
+		local x = minusB.x+(SPR_SIZE*minusB.scale*1.2)
 		--Render the number
 		printAlign(
 			number, 
-			minusB.x+(SPR_SIZE*minusB.scale*1.2), minusB.y*0.9, 
+			x, minusB.y*0.9, 
 			"center", "middle", 
 			WHITE, 
 			false, 2,
 			smallFont
 		)
+		--Render Instruction
+		printInstruction("Click and hold", HEIGHT*0.75, minusB, x)
 		--Render the buttons
 		plusB.render()
 		minusB.render()
 	end
-	--6-2-Releasing Example----
+	--3-2-Releasing Example----
 	--[[
-    This is the example on the screen 
-	center.
+		This is the example on the screen 
+		center.
 	
-	Press and release the button 
-	to alter the border color.
+		Press and release the button 
+		to alter the screen border-color.
 	]]--
 	borderColor = peek4(BORDER_COLOR*2)
 	borderColorB = Button({
@@ -533,7 +367,7 @@ function BOOT()
 		sprH = 2,
 		scale = 3,
 		--These margins ensure that only the middle of the sprite is clickable.
-		margins = {up=3, down=3, left=4, right=4}
+		margins = {top=3, bottom=3, left=4, right=4}
 	})
 	borderColorB.centralize(true)
 	
@@ -541,7 +375,7 @@ function BOOT()
 		borderColorB.update()--Update button
 		
 		if borderColorB.released then
-			--Alter color border
+			--Alter the screen color-border
 			local newColor = math.random(0, 15)
 			
 			if newColor == borderColor then
@@ -553,19 +387,22 @@ function BOOT()
 		end
 	end
 	function renderReleasingExample()
-		borderColorB.render()--Render button
+		--Render Instruction
+		printInstruction("Click and release", HEIGHT*0.36, borderColorB)
+		--Render button
+		borderColorB.render()
 	end
 	
-	--6-3-Switching Example----
+	--3-3-Switching Example----
 	--[[
-    The last example is composed of 
-    a switch. 
+		The last example is composed of 
+		a switch. 
  
-    Click on it to turn it on/off.
+		Click on it to turn it on/off.
  
-    If it is on, all the texts get 
-    in small font. Else, they get in 
-    normal font.
+		If it is on, all the texts get 
+		in small font. Else, they get in 
+		normal font.
 	]]--
 	smallFont = false
 	smallFontS = Switch({
@@ -573,7 +410,7 @@ function BOOT()
 		y = HEIGHT*0.54,
 		sprites = {291, 292},
 		scale = 5,
-		margins = {up=1, down=1, left=3, right=3}
+		margins = {top=1, bottom=1, left=3, right=3}
 	})
 	smallFontS.centralize(false, true)
 	
@@ -583,7 +420,10 @@ function BOOT()
 	end
 	
 	function renderSwitchingExample()
-		smallFontS.render()--Render switch
+		--Render Instruction
+		printInstruction("Click to\n\nturn on/off", HEIGHT*0.75, smallFontS)
+		--Render swicth
+		smallFontS.render()
 	end
 end
 ----TIC() Function----
