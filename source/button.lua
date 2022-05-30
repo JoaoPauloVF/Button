@@ -3,7 +3,7 @@
 -- desc:    A function that creates buttons that interact with the mouse
 -- github:  https://github.com/JoaoPauloVF/Button
 -- license: MIT License
--- version: 0.2
+-- version: 0.2.1
 -- script:  lua
 -- input:   mouse
 -- palette: 101015e64040651818ff9d59814410eeee447d7d10b6b6d244445d40e6e630919110343410284444f244107110f6f6f8
@@ -42,7 +42,7 @@
 function BOOT()
 	----Constants----
 	BORDER_COLOR = 0x3FF8
-	CURSOR_ADDR = 0x3FFB
+	--CURSOR_ADDR = 0x3FFB
 	
 	WIDTH = 240
 	HEIGHT = 136
@@ -107,6 +107,8 @@ function BOOT()
 		local cursorWasOnButton = false
 		local cursorJustLeft = false
 		
+		local SPR_SIZE = 8
+		
 		self.width = self.scale*(SPR_SIZE*self.sprW-self.margins.right-self.margins.left)
 		self.height = self.scale*(SPR_SIZE*self.sprH-self.margins.bottom-self.margins.top)
 		
@@ -151,6 +153,7 @@ function BOOT()
 		end
 		
 		self.updateCursor = function()
+			local CURSOR_ADDR = 0x3FFB
 			if self.changeCursor then
 				if cursorJustLeft then
 					poke(CURSOR_ADDR, cursors[1])
