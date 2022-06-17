@@ -3,7 +3,7 @@
 -- desc:    A function that creates buttons that interact with the mouse
 -- github:  https://github.com/JoaoPauloVF/Button
 -- license: MIT License
--- version: 0.2.1
+-- version: 0.3
 -- script:  lua
 -- input:   mouse
 -- palette: 101015e64040651818ff9d59814410eeee447d7d10b6b6d244445d40e6e630919110343410284444f244107110f6f6f8
@@ -98,9 +98,9 @@ function BOOT()
 		local sprId = self.sprites[1]
 		
 		--button state variables
-		self.pressed = false
+		local pressed = false
 		local wasPressed = false
-		self.released = false
+		local released = false
 		
 		--cursor state variables
 		local cursorIsOnButton = false
@@ -109,16 +109,22 @@ function BOOT()
 		
 		local SPR_SIZE = 8
 		
-		self.width = self.scale*(SPR_SIZE*self.sprW-self.margins.right-self.margins.left)
-		self.height = self.scale*(SPR_SIZE*self.sprH-self.margins.bottom-self.margins.top)
+		local width = self.scale*(SPR_SIZE*self.sprW-self.margins.right-self.margins.left)
+		local height = self.scale*(SPR_SIZE*self.sprH-self.margins.bottom-self.margins.top)
 		
+		self.getWidth = function()
+			return width
+		end
+		self.getHeight = function()
+			return height
+		end
 		
 		self.centralize = function(xAxis, yAxis)
 			if xAxis then
-				self.x = self.x - self.margins.left*self.scale - self.width/2
+				self.x = self.x - self.margins.left*self.scale - width/2
 			end
 			if yAxis then
-				self.y = self.y - self.margins.top*self.scale - self.height/2
+				self.y = self.y - self.margins.top*self.scale - height/2
 			end
 		end
 		
@@ -164,9 +170,16 @@ function BOOT()
 		end
 		
 		
+		self.isPressed = function()
+			return pressed
+		end
+		self.isReleased = function()
+			return released
+		end
+		
 		self.update = function()
-			self.pressed, self.released = self.updateState()
-			self.updateSprId(self.pressed)
+			pressed, released = self.updateState()
+			self.updateSprId(pressed)
 			self.updateCursor()
 		end
 		
@@ -199,13 +212,17 @@ function BOOT()
 	function Switch(settings)
 		local self = Button(settings)
 		
-		self.on = false
+		local on = false
+		
+		self.isOn = function()
+			return on
+		end
 		
 		self.update = function()
 			local pressed, released = self.updateState()
 			
-			if released then self.on = not(self.on) end
-			self.updateSprId(self.on)
+			if released then on = not(on) end
+			self.updateSprId(on)
 			self.updateCursor()
 		end
 		
@@ -263,7 +280,7 @@ function BOOT()
 		It prints the examples texts.
 	]]--
 	function printInstruction(text, y, button, x)
-		local x = x or button.x + button.width/2 + button.margins.left*button.scale
+		local x = x or button.x + button.getWidth()/2 + button.margins.left*button.scale
 		local y = y or 0
 		printAlign(
 				text, 
@@ -328,10 +345,10 @@ function BOOT()
 		plusB.update()
 		minusB.update()
 			
-		if plusB.pressed then
+		if plusB.isPressed() then
 			number=number+1
 		end
-		if minusB.pressed then
+		if minusB.isPressed() then
 			number=number-1
 		end
 	end
@@ -377,7 +394,7 @@ function BOOT()
 	function updateReleasingExample()
 		borderColorB.update()--Update button
 		
-		if borderColorB.released then
+		if borderColorB.isReleased() then
 			--Alter the screen color-border
 			local newColor = math.random(0, 15)
 			
@@ -419,7 +436,7 @@ function BOOT()
 	
 	function updateSwitchingExample()
 		smallFontS.update()--Update button
-		smallFont = smallFontS.on--Update smallFont
+		smallFont = smallFontS.isOn()--Update smallFont
 	end
 	
 	function renderSwitchingExample()
